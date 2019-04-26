@@ -1,6 +1,6 @@
 %% Generating small clips
 clc; close all; clear all;
-testOption = 1;
+testOption = 0;
 
 names = [];
 mofreq_vals = zeros(50);

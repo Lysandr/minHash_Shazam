@@ -46,16 +46,16 @@ nfft = 64e-3;
 
 log_S = log10(abs(S)+1);
 
-figure;
-imagesc(T,F,20*log10(abs(S)));
-axis xy;
-xlabel('Time (s)')
-ylabel('Frequency (kHz)')
-title('Spectrogram')
-colormap jet
-c= colorbar;
-set(c);
-ylabel(c,'Power (dB)','FontSize',14);
+% figure;
+% imagesc(T,F,20*log10(abs(S)));
+% axis xy;
+% xlabel('Time (s)')
+% ylabel('Frequency (kHz)')
+% title('Spectrogram')
+% colormap jet
+% c= colorbar;
+% set(c);
+% ylabel(c,'Power (dB)','FontSize',14);
 
 
 n=0;

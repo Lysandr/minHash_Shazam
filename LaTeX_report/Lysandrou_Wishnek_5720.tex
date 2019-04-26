@@ -1,0 +1,150 @@
+\documentclass[paper]{aiaaNew}
+
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{amsthm}% http://ctan.org/pkg/amsthm
+\usepackage{amsmath}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{graphicx,subfigure}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{longtable,tabularx}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+% \documentclass[conf]{new-aiaa}
+\usepackage[utf8]{inputenc}
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+% \usepackage{subcaption} 
+% \usepackage{caption}
+
+
+
+% \newenvironment{proof}
+% {}{}
+
+
+%\documentstyle[10pt,draft,fancyheadings]{AIAAtran}
+%\documentstyle[9pt,twocolumn,technote,twoside]{AIAAtran}
+
+
+\SubmitName{Lysandrou}
+% for conference paper:
+\PaperNumber{xxx}
+\CoverFigure{}
+\Conference{{\bfseries AIAA Guidance, Navigation and \\ Control 
+Conference} \\
+            August 10--12,~1998 / Boston, MA}
+
+% for a journal simulation cover page:
+\JournalName{Journal of Guidance, Navigation and Control}
+\JournalIssue{Volume~xx, Number~xx, Jan.--Feb., 2001, Pages xx--xx}
+% journal article simulation:
+\ArticleIssue{Vol.~24, No.~1, Jan.--Feb., 2001}% first page
+\ArticleHeader{Schaub Et Al: New Penalty Functions}% subsequent pages
+% journal note simulation:
+\NoteHeader{J.Guidance, Vol.~20, No.~13: Engineering Notes}
+% set copyright and other notices to appear
+% as a footnote at the bottom of the first page:
+%\PaperNotice{\CopyrightB{1998}{Hanspeter Schaub}}
+\JournalNotice{Presented as Paper~06--3792 at the AIAA
+               Guidance, Navigation and Control Conference, San 
+Diego,~CA,               July~29--31,~1996.
+               \CopyrightB{1996}{the authors}}
+% load the title, author, and abstract for use with the \maketitle command
+
+
+
+
+\title{Attitude Dynamics and Control of a Nano-Satellite Orbiting Mars}
+\author{Padraig S. Lysandrou
+  \thanks{PhD Student, Aerospace Engineering Department.  Student Member of AIAA.}
+  \\
+  \emph{\normalsize The University of Colorado Boulder, Boulder, CO 80301}
+}
+
+\abstract{
+This project for ASEN5010 Spacecraft Dynamics and Control considers a small satellite orbiting Mars at a low altitude. This spacecraft gathers science data and transfers this data to another satellite orbiting at a higher altitude. Periodically, this spacecraft must transition from nadir-pointing, science gathering mode to sun-pointing mode to recharge the battery system. The three missions goals are nadir-pointing, communicating with the mother spacecraft, and to sun-point. We must develop a simulation architecture to demonstrate closed loop attitude control and verify performance characteristics.}
+
+\begin{document}
+\maketitle
+
+\section*{Introduction and Problem Definition}
+\PARstart{T}{his}
+
+
+\section*{Problem Statement}
+
+
+\begin{equation}
+\left| \begin{array}{c|c|c|c}{f_{1}} & {f_{2}} & {t_{1}} & {t_{2}-t_{1}} \\ {\vdots} & {\vdots} & {\vdots} & {\vdots} \\ {f_{j}} & {f_{k}} & {t_{j}} & {t_{k}-t_{j}} \\ {\vdots} & {\vdots} & {\vdots} & {\vdots} \\ {f_{m}} & {f_{n}} & {t_{m}} & {t_{n}-t_{m}}\end{array}\right|
+\end{equation}
+
+
+
+\begin{equation}
+  \bm{x} = T(:\ ,2) + 2^8T(:\ ,1) + 2^{16}T(:\ ,4) 
+\end{equation}
+
+\begin{equation}
+  h(x) = \min{(\bm{a}x + \bm{b} \mod w)} \ \ \in \mathbb{R}^k
+\end{equation}
+
+\begin{equation}
+  \bm{a},\ \bm{b} \ \  \text{Uni}[]
+\end{equation}
+
+
+
+\begin{algorithm}
+\caption{Simple Matching Function}\label{match}
+\begin{algorithmic}[1]
+\State $Cliphashtable = minhash(make\_table(clip));$
+\State $k = \text{const}, \ \dim(h(x))$
+\State $clip\_score = 0$
+\For{i = 1:N} 
+    \State $ hashTable\_sentence = minhashTable((i-1)*k+1: i*k,1)$
+    \State $ local\_sens\_bool = abs(Cliphashtable-hashTable\_sentence) \leq 100$
+    \State $ local\_score = \sum(local\_sens\_bool)$
+    \If{$song\_score < local\_score$}
+        \State $song\_score = local\_score$
+        \State $songName = i$
+    \EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+
+
+% k = 500;
+% song_score = 0;
+% for i = 1:50
+%     hashTable_sentence = hashTable((i-1)*k+1: i*k,1);
+%     local_sens_bool = abs(Cliphashtable-hashTable_sentence) <= 100;
+%     local_sens_bool = 1.*local_sens_bool + ...
+%         1.*(Cliphashtable == hashTable_sentence);
+    % local_score = sum(local_sens_bool);
+%     if song_score < local_score
+%         song_score = local_score;
+%         songName = i;
+%     end
+% end
+
+
+
+
+\bibliographystyle{aiaa}   % Number the references.
+\bibliography{references}   % Use references.bib to resolve the labels.
+
+\section*{Project Code}
+% \lstinputlisting[caption = {Main Script (Simulation Framework)}]{../../main.m}
+
+% \newpage
+% \lstinputlisting[caption = {System Dynamics RHS}]{../../dynamics.m}
+
+% \lstinputlisting[caption = {Tracking Error Determination}]{../../track_error.m}
+
+% \lstinputlisting[caption = {Tracking Error Determination}]{../../oe2rv_schaub.m}
+
+\end{document}
+
