@@ -22,7 +22,7 @@ matchMatrix = [];
 % if isnan(songnumber)
 %     songName = NaN;
 % else
-%     songName = songnumber;
+%     songName = songNameTable(songnumber,:);
 % end
 
 %%  Knearest neigbours
@@ -33,17 +33,16 @@ matchMatrix = [];
 % test_subset = randsample( 700, 350  );
 % TestPoints      = Test(test_subset,:);
 
-% K = 10;   % # of nearest neighbors to use
-% Train = reshape(hashTable(:,1),700,50).';
-% test_set= Cliphashtable.';
-% D   = pdist2_faster(Train, test_set);
-% [~,Ind]   = sort(D); % per row, sort the columns
-% 
-% Train_labels = [1:50].';
-% labels      = Train_labels(Ind(1:K,:) );
-% intermode = mode(labels,1); % just for debug
-% songName  = mode(intermode);
-% disp('did something');
+K = 10;   % # of nearest neighbors to use
+Train = reshape(hashTable(:,1),700,50).';
+D   = pdist2_faster(Train, Cliphashtable.');
+[~,Ind]   = sort(D); % per row, sort the columns
+
+Train_labels = hashTable(:,3).';
+labels      = Train_labels(Ind(1:K,:) );
+intermode = mode(labels,1); % just for debug
+songName  = mode(intermode);
+disp('did something');
 
 
 %% convolution maximization
@@ -54,21 +53,20 @@ matchMatrix = [];
 
 
 %% Window search the hash functions
-k = 500;
-song_score = 0;
-for i = 1:50
-    hashTable_sentence = hashTable((i-1)*k+1: i*k,1);
-    local_sens_bool = abs(Cliphashtable-hashTable_sentence) <= 100;
-%     local_sens_bool = 1.*local_sens_bool + ...
+% k = 700;
+% song_score = 0;
+% for i = 1:50
+%     hashTable_sentence = hashTable((i-1)*k+1: i*k,1);
+%     local_sens_bool = abs(Cliphashtable-hashTable_sentence) <= 10;
+%     local_sens_bool = 100.*local_sens_bool + ...
 %         1.*(Cliphashtable == hashTable_sentence);
-    local_score = sum(local_sens_bool);
-    if song_score < local_score
-        song_score = local_score;
-        songName = i;
-    end
-end
-songName;
-disp('');
+%     local_score = sum(local_sens_bool);
+%     if song_score < local_score
+%         song_score = local_score;
+%         songName = i;
+%     end
+% end
+
 
 
 

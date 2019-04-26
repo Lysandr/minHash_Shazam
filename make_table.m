@@ -44,13 +44,8 @@ noverlap = 32e-3;
 nfft = 64e-3;
 [S,F,T] = spectrogram(y, window*Fs, noverlap*Fs, nfft*Fs, Fs);
 
-% for i = 1:length(F)
-%     
-% end
-
 log_S = log10(abs(S)+1);
 
-% 
 % figure;
 % imagesc(T,F,20*log10(abs(S)));
 % axis xy;
@@ -67,7 +62,7 @@ n=0;
 thirtypersecond=floor(30*length(y)/8000+.5);
 upper=1;
 lower=0;
-thresh = .5;
+thresh = 0.5883;
 % gs = 9; % Remove for generalized function
 dim = floor(gs/2);
 

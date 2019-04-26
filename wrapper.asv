@@ -7,28 +7,41 @@ mofreq_vals = zeros(50);
 mofreq_quants = zeros(50);
 
 for i = 1:50
+    % Resample the clip data
     fileName = ['../Shazam_16/Shazam_minhash/songDatabase/',num2str(i,'%02.f'),'.mat'];
     sample = load(fileName,'-mat');
     Fs = 8000;
-    y = resample(sample.y(:,1),Fs,sample.Fs);
-    q=length(y);
-    clip_start = 0.1*q;
-    clip_end = clip_start + 10*Fs;
-    y  = y(ceil(clip_start): floor(clip_end));
-    % adding noise because why not
-    y = y + randn(size(y))*1e-3;
+    y_og = resample(sample.y(:,1),Fs,sample.Fs);
+    q=length(y_og);
+    
+    % Calculate the time frame to generate clips
+    clip_start = 0.15*q;
+    clip_end = clip_start + 30*Fs;
+    if clip_end > q
+       clip_end = q; 
+    end
+    
+    % truncate for clip and add noise because why not
+    y  = y_og(ceil(clip_start): floor(clip_end));
+    y = y + randn(size(y))*1e-1;
+    soundsc(y,)
     clip.y = y;
-    clip.Fs = 8000;
+    clip.Fs = Fs;
+    
+    % run the search function on the clip
     tic
-    [name,freqs,quants] = main_minhash(testOption,clip);
-    names = [names;name];
-    mofreq_vals(1:length(freqs),i) = freqs;
-    mofreq_quants(1:length(quants),i) = quants;
+    [songName] = main_minhash(testOption,clip);
+    names = [names; songName];
+%     mofreq_vals(1:length(freqs),i) = freqs;
+%     mofreq_quants(1:length(quants),i) = quants;
     toc
+    if songName == i
+        disp(songName)
+    end
     testOption = 0;
 end
 
-correct = sum(1:50 == mofreq_vals(1,:))/50
+correct = sum([1:50].' == names)/50
 disp('done');
 
 
