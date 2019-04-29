@@ -4,12 +4,12 @@ testOption = 0;
 
 names = [];
 times = [];
-db_N = 50;
+db_N = 10;
 duration = 15;
 
 for i = 1:db_N
     % Resample the clip data
-    fileName = ['../songDatabase/',num2str(i,'%02.f'),'.mat'];
+    fileName = ['songDatabase/',num2str(i,'%02.f'),'.mat'];
     sample = load(fileName,'-mat');
     Fs = 8000;
     y_og = resample(sample.y(:,1),Fs,sample.Fs);
@@ -41,7 +41,7 @@ for i = 1:db_N
     testOption = 0;
 end
 
-correct = sum([1:50].' == names)/db_N
+correct = sum([1:db_N].' == names)/db_N
 disp('done');
 
 
