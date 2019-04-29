@@ -1,13 +1,5 @@
 function table = make_table(clip,gs,deltaTL,deltaTU,deltaF)
 
-
-
-% Load in the sample.mat file in the folder and resample it.
-% 2. Take the (log magnitude) spectrogram of the song using spectrogram.
-% 3. Find the local peaks of the spectrogram.
-% 4. Threshold the result of step 3 to end up with peak rate peaks/sec (30 peaks per second).
-% 5. For each peak, find â€œfan-outâ€? pairs in the â€œtarget windowâ€? and then add to the table.
-% 
 close all 
 % lets spectrogram at 44.1 and then filter, then resample at 8
 
@@ -45,17 +37,17 @@ nfft = 64e-3;
 [S,F,T] = spectrogram(y, window*Fs, noverlap*Fs, nfft*Fs, Fs);
 
 log_S = log10(abs(S)+1);
-
-figure;
-imagesc(T,F,20*log10(abs(S)));
-axis xy;
-xlabel('Time (s)')
-ylabel('Frequency (kHz)')
-title('Spectrogram')
-colormap jet
-c= colorbar;
-set(c);
-ylabel(c,'Power (dB)','FontSize',14);
+% 
+% figure;
+% imagesc(T,F,20*log10(abs(S)));
+% axis xy;
+% xlabel('Time (s)')
+% ylabel('Frequency (kHz)')
+% title('Spectrogram')
+% colormap jet
+% c= colorbar;
+% set(c);
+% ylabel(c,'Power (dB)','FontSize',14);
 
 
 n=0;
@@ -78,7 +70,7 @@ for i = -dim:dim
 end
 
 
-%% PART 4
+%% filter 30 per second
 %could implement another way - sort peaks by height and take all up to
 %index thirtypersecond. Thresh is the height of that thirtypersecond'th
 %peak.
@@ -101,7 +93,7 @@ end
 localPeak=tempthing;
 %END PART 4. localPeak is boolean matrix, n=number of peaks=thirtypersecond
 
-%% Part 5
+%% fanout search
 % deltaTL=3; %Remove for generalized function
 % %dTL=Fs*deltaTL;
 % deltaTU=6; %Remove for generalized function

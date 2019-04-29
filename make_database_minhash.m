@@ -14,7 +14,7 @@ for i = 1:50
     else
         songName = strcat(num2str(i), '.mat');
     end
-    song = load(['../Shazam_16/Shazam_minhash/songDatabase/',songName]);
+    song = load(['../songDatabase/',songName]);
     tbl = make_table(song,gs,deltaTL,deltaTU,deltaF);
     minhashTable = [minhashTable; minhash([tbl (i*ones(length(tbl),1))])];
     songNameTable = [songNameTable;songName];
