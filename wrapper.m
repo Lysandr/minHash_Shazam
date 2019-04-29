@@ -9,7 +9,7 @@ duration = 15;
 
 for i = 1:db_N
     % Resample the clip data
-    fileName = ['../Shazam_16/songDatabase/',num2str(i,'%02.f'),'.mat'];
+    fileName = ['../songDatabase/',num2str(i,'%02.f'),'.mat'];
     sample = load(fileName,'-mat');
     Fs = 8000;
     y_og = resample(sample.y(:,1),Fs,sample.Fs);
